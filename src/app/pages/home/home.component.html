@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-12 col-md-12">
     <mat-form-field class="col-12 col-md-12" appearance="fill">
-      <mat-label>Ingresa libro y presiona en la lupa</mat-label>
+      <mat-label>Ingresa libro y presiona ENTER o en la lupa</mat-label>
       <input #search matInput type="text" (keyup.enter)="searchBook(search.value)">
       <button  class="searchButton" matSuffix mat-icon-button aria-label="Clear" (click)="searchBook(search.value)">
         <mat-icon>search</mat-icon>

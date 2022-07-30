@@ -19,7 +19,7 @@
         <mat-divider inset></mat-divider>
           <mat-card-actions>
             <button (click)="open(book)" mat-button>Editar libro</button>
-            <button  mat-button>Eliminar libro</button>
+            <button (click)="deleteBook(book.id)" mat-button>Eliminar libro</button>
           </mat-card-actions>
       </mat-card>
     </div>
