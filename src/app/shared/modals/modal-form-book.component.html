@@ -1,0 +1,45 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Editar libro</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss();closeModal()"></button>
+  </div>
+  <div class="modal-body">
+    <form  [formGroup]="formBook" (submit)="editarLibro()">
+      <div class = "row justify-content-center">
+        <mat-form-field appearance="outline" class="col-md-12">
+          <mat-label>titulo</mat-label>
+          <input matInput formControlName="title">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-md-12">
+          <mat-label>subtitulo</mat-label>
+          <input matInput formControlName="subtitle">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-md-12">
+          <mat-label>Autores</mat-label>
+          <input matInput formControlName="authors">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-md-12">
+          <mat-label>Categorias</mat-label>
+          <input matInput formControlName="categories">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-md-12">
+          <mat-label>Fecha de publicación</mat-label>
+          <input matInput formControlName="publishedDate" type="date">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="col-md-12">
+          <mat-label>Descripción</mat-label>
+          <textarea rows="20" matInput formControlName="description"></textarea>
+        </mat-form-field>
+
+        <div class = "col-md-6">
+
+        </div>
+        <div class = "col-md-6">
+
+        </div>
+      </div>
+
+    </form>
+
+  </div>
+</ng-template>

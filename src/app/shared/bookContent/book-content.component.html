@@ -1,0 +1,49 @@
+<div>
+  <app-modal-form-book *ngIf="openModal" (eventCloseModal)="this.openModal = false" [value]="this.data"></app-modal-form-book>
+  <h1>Libros añadidos</h1>
+  <div *ngIf = "books.length == 0">
+    <p>Sin resultados</p>
+  </div>
+  <div *ngFor="let book of books">
+    <div class="pb-4">
+      <mat-card class="example-card">
+        <mat-card-title>{{ book.volumeInfo.title }}</mat-card-title>
+        <mat-card-subtitle>{{ book.volumeInfo.subtitle}}</mat-card-subtitle>
+        <mat-card-content>
+          <p>{{ book.volumeInfo.authors}}</p>
+          <p>{{ book.volumeInfo.categories}}</p>
+          <p>{{ book.volumeInfo.publishedDate}}</p>
+          <p>{{ book.volumeInfo.description}}</p>
+        </mat-card-content>
+
+        <mat-divider inset></mat-divider>
+          <mat-card-actions>
+            <button (click)="open(book)" mat-button>Editar libro</button>
+            <button  mat-button>Eliminar libro</button>
+          </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+
+  <h1>Otros libros encontrados</h1>
+  <div *ngFor="let book of googlebooks">
+    <div class="pb-4">
+      <mat-card class="example-card">
+        <mat-card-title>{{ book.volumeInfo.title }}</mat-card-title>
+        <mat-card-subtitle>{{ book.volumeInfo.subtitle}}</mat-card-subtitle>
+        <mat-card-content>
+          <p>{{ book.volumeInfo.authors}}</p>
+          <p>{{ book.volumeInfo.categories}}</p>
+          <p>{{ book.volumeInfo.publishedDate}}</p>
+          <p>{{ book.volumeInfo.description}}</p>
+        </mat-card-content>
+
+        <mat-divider inset></mat-divider>
+          <mat-card-actions>
+            <button (click)="addBook(book)"  mat-button>Añadir libro</button>
+          </mat-card-actions>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
