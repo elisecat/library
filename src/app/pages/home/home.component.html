@@ -2,7 +2,7 @@
   <div class="col-12 col-md-12">
     <mat-form-field class="col-12 col-md-12" appearance="fill">
       <mat-label>Ingresa libro y presiona en la lupa</mat-label>
-      <input #search matInput type="text">
+      <input #search matInput type="text" (keyup.enter)="searchBook(search.value)">
       <button  class="searchButton" matSuffix mat-icon-button aria-label="Clear" (click)="searchBook(search.value)">
         <mat-icon>search</mat-icon>
       </button>
@@ -10,6 +10,6 @@
 
   </div>
   <div class=" col-12" *ngIf="estado === 2">
-    <app-book-content [books]="books" [googleBooks]="googleBooks"></app-book-content>
+    <app-book-content [books]="books" [googleBooks]="googleBooks" (eventCloseModalandSearch) = "searchBook(search.value)"></app-book-content>
   </div>
 </div>

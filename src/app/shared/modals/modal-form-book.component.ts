@@ -13,14 +13,16 @@ export class ModalFormBookComponent implements AfterViewInit, OnInit{
 
   public formBook: FormGroup | any;
 
+
+
   ngOnInit(): void {
     this.formBook = new FormGroup({
       title: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]),
-      subtitle: new FormControl('', [Validators.required, Validators.minLength(2), Validators.maxLength(100)]),
-      authors: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(100)]),
-      categories: new FormControl('', Validators.required),
-      publishedDate: new FormControl('', Validators.required),
-      description: new FormControl('', [Validators.required, Validators.minLength(5), Validators.maxLength(2000)]),
+      subtitle: new FormControl('', [Validators.minLength(2), Validators.maxLength(100)]),
+      authors: new FormControl(''),
+      categories: new FormControl('',),
+      publishedDate: new FormControl(''),
+      description: new FormControl('', [Validators.minLength(5), Validators.maxLength(2000)]),
     });
 
     this.formBook.controls['title'].setValue(this.value.volumeInfo.title);
@@ -33,13 +35,14 @@ export class ModalFormBookComponent implements AfterViewInit, OnInit{
 
   @Input('value') value: book | any;
   @Output() eventCloseModal = new EventEmitter<string>();
+  @Output() eventCloseModalandSearch = new EventEmitter<string>();
+
 
   @ViewChild('content') mymodal: ElementRef | any;
 
 
 
   ngAfterViewInit(): void {
-    console.log(this.value);
     this.modalService.open(this.mymodal, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     });
@@ -56,6 +59,15 @@ export class ModalFormBookComponent implements AfterViewInit, OnInit{
   constructor(private modalService: NgbModal) {}
 
   editarLibro(){
+    if(this.formBook.valid){
+      let books = JSON.parse(localStorage.getItem('book')||'[]')
+      let index = books.findIndex((e:any)=>e.id == this.value.id)
+      books[index].volumeInfo = this.formBook.value
+      localStorage.setItem('book', JSON.stringify(books))
+      this.eventCloseModalandSearch.emit();
+
+    }
+    document.getElementById("closeModalButton")?.click();
 
   }
 

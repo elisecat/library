@@ -45,16 +45,20 @@ export class HomeComponent implements OnInit {
 
 
     this.bookservice.list(text).subscribe(res =>{
-      console.log(res);
       this.googleBooks = res.items;
-      console.log(this.googleBooks);
       this.booksBack.map((item:any)=>{
         let filter = this.googleBooks.findIndex((e:any)=> e.id == item.id)
-        console.log(filter)
         if(filter >= 0 ){
+          let index = this.books.findIndex((e:any)=>e.id == this.googleBooks[filter].id)
+          if(index < 0){
+            this.books.push(this.googleBooks[filter])
+          }
+
           this.googleBooks.splice(filter,1)
         }
       })
+
+
       this.estado = 2;
     })
   }

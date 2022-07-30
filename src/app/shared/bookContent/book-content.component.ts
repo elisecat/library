@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { book } from 'src/app/models/book';
 import {  NgbModal } from '@ng-bootstrap/ng-bootstrap'
 
@@ -12,15 +12,14 @@ export class BookContentComponent implements OnInit {
 
   @Input('books') books: book | any = [];
   @Input('googleBooks') googlebooks: book | any = [];
+  @Output() eventCloseModalandSearch = new EventEmitter<string>();
 
   public data: book | any;
 
   constructor(private modalService: NgbModal) { }
 
   ngOnInit(): void {
-    console.log(this.books);
-    console.log(this.googlebooks);
-    console.log(this.openModal);
+
   }
 
   addBook(book:any){
@@ -30,9 +29,9 @@ export class BookContentComponent implements OnInit {
   }
 
     books.push(book);
-    // this.books;
-    // let index = this.googlebooks.findIndex((e:any) => e.id == book.id);
-    // this.googlebooks.slice(index, 1);
+    this.books.push(book);
+    let index = this.googlebooks.findIndex((e:any) => e.id == book.id);
+    this.googlebooks.splice(index, 1);
     localStorage.setItem('book', JSON.stringify(books));
   }
 
@@ -42,6 +41,11 @@ export class BookContentComponent implements OnInit {
   open(value:any) {
     this.openModal=true;
     this.data = value;
+  }
+  eventCloseAndSearch(){
+    this.openModal = false;
+    this.eventCloseModalandSearch.emit()
+
   }
 
 }

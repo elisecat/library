@@ -1,7 +1,7 @@
 <ng-template #content let-modal>
   <div class="modal-header">
     <h4 class="modal-title" id="modal-basic-title">Editar libro</h4>
-    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss();closeModal()"></button>
+    <button id="closeModalButton" type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss();closeModal()"></button>
   </div>
   <div class="modal-body">
     <form  [formGroup]="formBook" (submit)="editarLibro()">
@@ -31,10 +31,9 @@
           <textarea rows="20" matInput formControlName="description"></textarea>
         </mat-form-field>
 
-        <div class = "col-md-6">
 
-        </div>
-        <div class = "col-md-6">
+        <div class = "col-md-12 d-flex justify-content-end">
+          <button (click)="editarLibro()" mat-button>Guardar</button>
 
         </div>
       </div>
