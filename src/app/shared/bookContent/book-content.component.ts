@@ -48,13 +48,14 @@ export class BookContentComponent implements OnInit {
 
   }
   deleteBook(id:number){
-    let books = JSON.parse(localStorage.getItem('book') || '[]');
+    let books = this.books
     let index = books.findIndex((e:any) => e.id == id);
     let arr0 = [];
     arr0.push(books[index])
     let newArray = arr0.concat(this.googlebooks)
     this.googlebooks = newArray
-    books.splice(1,index);
+    console.log(index)
+    books.splice(index,1);
     this.books = books
     localStorage.setItem('book', JSON.stringify(books));
 
